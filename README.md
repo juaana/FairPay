@@ -1,0 +1,2 @@
+# FairPay
+Fair Income Splitter
