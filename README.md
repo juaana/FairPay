@@ -16,7 +16,7 @@ Explore the code, experiment with equitable payment calculations, and discover i
 <br>
 Juana Zabaleta
 <br>
-**[E-mail](mailto:jjuanazabaleta@gmail.com?subject=[GitHub]%20Source%20Han%20Sans)**
+**<a href="mailto:jjuanazabaleta@gmail.com?Subject=Fair%20Pay%20Project">Email</a>**
 <br>
 **[LinkedIn](https://www.linkedin.com/in/juanazabaleta/)**
 
