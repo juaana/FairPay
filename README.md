@@ -16,7 +16,7 @@ Explore the code, experiment with equitable payment calculations, and discover i
 <br>
 Juana Zabaleta
 <br>
-**[E-mail](jjuanazabaleta@gmail.com)**
+**[E-mail](mailto:jjuanazabaleta@gmail.com)**
 <br>
 **[LinkedIn](https://www.linkedin.com/in/juanazabaleta/)**
 
