@@ -1,5 +1,83 @@
 * {
     Margin: 0;
     padding: 0;
+    max-width: 100%;
+    max-height: 100%;
     box-sizing: border-box;
+    font-family: "Raleway", sans-serif;
+    height: auto;
+        width: inherit;
+        
+}
+
+
+.home-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2.5fr 2fr 1fr;
+    grid-template-areas: 
+                 "h1 h1"
+                "h2 h3"
+                "h4 about";
+}
+.home-container-h1 {
+    grid-area: h1;
+    padding-left: 5em;
+    background: linear-gradient(to right, #E5E5BE, #003973);
+    color: white;
+
+
+}
+.home-navBar{
+    color: white;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+.home-navBar-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    list-style: none;
+    padding: 1em 5em 1em 1em;
+
+}
+.home-navBar-item li{
+    margin: 1em;
+
+}
+
+.home-container-h1 h1{
+    padding-top: 1em;
+    font-size: 5em;
+    font-weight: bold;
+}
+
+/*H2*/
+.home-container-h2 {
+    grid-area: h2;
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+    
+    background-color: white;
+
+}
+.home-container-h2 li{
+        list-style: none;
+}
+.home-container-h3 {
+    grid-area: h3 ;
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    background-color: white;
+}
+.home-container-h4 {
+    grid-area: h4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2em;
 }
