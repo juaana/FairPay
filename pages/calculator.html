@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -11,9 +12,10 @@
     />
     <link rel="stylesheet" href="../css/style.css" />
     <title>Fairpay</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
-    <script src="./script/script.js"></script>
+    <script src="../script/script.js"></script>
     <div class="calculator-container">
       <div class="calculator-container-h1">
         <div class="calculator-navBar">
@@ -26,11 +28,16 @@
         <h1>Calculator</h1>
       </div>
         <div class="calculator-container-form">
-          <form class="calculator-form-item">
-             <h2>Enter the number of people:</h2> 
-             <label for="number"> Enter between how many people would you like to split the expense</label>
-             <input type="number"  name="numPersons" required>
-            <button type="button"  class="buttonNumPersons" onclick="howManyPeople()">Calculate and compare</button>
+          <h2>Calculate your expense</h2> 
+          <form class="calculator-form">
+             <label> Between how many people would you like to split the expense?</label>
+             <div class="calculator-form-item">
+              <input type="number" class="numPersons" name="numPersons" required>
+              <button type="button"  name="buttonNumPersons" class="buttonNumPersons">></button>
+             
+             </div> 
+              <div class="all-forms"></div>
+          
           </form>
         </div>
         <div class="calculator-container-h4">

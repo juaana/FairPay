@@ -288,60 +288,135 @@ color: white;
     justify-content: center;
     align-items: center;
 }
-
-.calculator-form-item{
+.calculator-container-form h2{
+    margin: 1em;
+}
+.calculator-form{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.calculator-form-item :is(input, button){
-    margin: 0.5em;
-
+.calculator-form-item{
+    display: flex;
+    margin: 1em;
+    
 }
-
+.calculator-form label{
+    margin-top: 0.8em;
+    font-size: 0.9em;
+}
+.calculator-form-item input {
+    
+    width: 5.5em;
+    height: 3em;
+    border-radius: 1.2em;
+    border: 2px solid rgb(0, 59, 117, 0.2);
+    transition: 0.5s;
+    text-align: center;
+    
+        
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.calculator-form-item input:hover{
+    width: 7em;
+    border: 2px solid rgb(0, 59, 117, 0.6);
+}
 .buttonNumPersons{
-    font-size: 1em;
+    font-size: 0.8em;
     background: transparent;
     border: none;
-    background: #074481;
+    
     opacity: 30%;
-    color: white;
+    color: #074481;
     cursor: pointer;
-    padding: 0.8em 1.8em;
+    padding: 0.5em 1em;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 1em;
-font-weight: 400;
+    border-radius: 1.5em;
+    font-weight: 400;
+    margin-left: -2.5em;
 }
-
-
-
+.form-alert{
+    font-size: 0.6em;
+    color: rgb(211, 99, 99);
+}
 .buttonNumPersons:hover {
     opacity: 20%;
 }
 
-.calculator-container-h4 {
-    grid-area: h4;
+
+.all-forms {
     display: flex;
-    background: linear-gradient(to right, #E5E5BE, #003973);
+    align-items: center;
+    justify-content: center;
+    flex-flow: row wrap;
+} 
+
+.calculator-form-name{
+     display: flex;
+        justify-content: center;
+        margin: 1em;
+        flex-direction: column;
+        align-items: center;
+        background-color: rgb(212, 230, 189, 38%);
+        padding: 1em 1em;
+        border-radius: 4%;
+}
+.calculator-form-name h3{
+    font-size: 0.8em;
+    margin-bottom: 0.4em;
+    text-align: center;color: #003973;
+}
+[class^="personName"]{
+    font-weight: 525 ;
+}
+[class^="personIncomeLabel"] {
+    font-weight: 300;
+}
+.name-box input{
+    height: 3em;
+    border-radius: 1.2em;
+    border: 2px solid rgb(0, 59, 117, 0.2);
+    transition: 0.5s;
+    text-align: center;
+    margin-bottom: 1em;
+}
+.name-box{
+    display: flex;
+    flex-direction: row;
+    
+}
+.calculate-button{
+    font-size: 1em;
+    background-color: #074481;
+    border: none;
+    opacity: 30%;
     color: white;
-    align-items: flex-start;
+    cursor: pointer;
+    padding: 1em 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1.5em;
+    font-weight: 400;
+    position: relative;
+    bottom: 0em;
+    margin: 2em;
+}
+.calculate-button:hover {
+    opacity: 20%;
 }
 
-.buttonNumPersons:hover {
-    opacity: 20%;
-}
-.calculator-container-h4 {
-    grid-area: h4;
-    display: flex;
-    background: linear-gradient(to right, #E5E5BE, #003973);
-    color: white;
-    align-items: flex-start;
-}
-.buttonNumPersons:hover {
-    opacity: 20%;
+
+.name-box input:hover {
+    border: 2px solid rgb(0, 59, 117, 0.6);
+    transition: 0.5s;
 }
 .calculator-container-h4 {
     grid-area: h4;
