@@ -1,6 +1,5 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     let form = document.querySelector(".calculator-container-form");
-    let nameArray = [];
 
     function generateClassName(base, index) {
         return `${base}-${index}`;
@@ -30,12 +29,12 @@ document.addEventListener("DOMContentLoaded", function() {
         let personIncomeLabel = document.querySelector(`.personIncomeLabel-${i + 1}`);
 
         if (nameInput && incomeInput && personName && personIncomeLabel) {
-            nameInput.addEventListener('input', function() {
+            nameInput.addEventListener('input', function () {
                 personName.textContent = nameInput.value.trim() !== '' ? nameInput.value : `Person number ${i + 1}`;
                 personIncomeLabel.textContent = `Enter the income of ${nameInput.value.trim() !== '' ? nameInput.value : `person number ${i + 1}`}`;
             });
 
-            incomeInput.addEventListener('input', function() {
+            incomeInput.addEventListener('input', function () {
                 personIncomeLabel.textContent = `Enter the income of ${nameInput.value.trim() !== '' ? nameInput.value : `person number ${i + 1}`}`;
             });
         }
@@ -66,6 +65,9 @@ document.addEventListener("DOMContentLoaded", function() {
             form.querySelector('.all-forms').insertAdjacentHTML('beforeend', `
                 <button type="submit" class="calculate-button">Calculate percentage</button>
             `);
+
+            // Cargar datos almacenados en el archivo JSON local
+            loadStoredData();
         } else {
             // Create and append a new alert
             let alertDiv = document.createElement('div');
@@ -77,13 +79,38 @@ document.addEventListener("DOMContentLoaded", function() {
         return numPersons;
     }
 
+    function loadStoredData() {
+        // Fetch data from JSON file
+        fetch('../data/data.json')
+            .then(response => response.json())
+            .then(data => {
+                let numPersons = parseFloat(localStorage.getItem('numPersons'));
+
+                for (let i = 1; i <= numPersons; i++) {
+                    let nameInput = document.querySelector(`.${generateClassName('form-name', i)}`);
+                    let incomeInput = document.querySelector(`.${generateClassName('form-name-income', i)}`);
+                    let storedName = data[`personName${i}`];
+                    let storedIncome = data[`personIncome${i}`];
+
+                    if (nameInput && incomeInput && storedName && storedIncome) {
+                        nameInput.value = storedName;
+                        incomeInput.value = storedIncome;
+
+                        // Actualizar información en tiempo real
+                        updatePersonInfo(i - 1);
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    }
+
     function calculatePercentage(event) {
         event.preventDefault(); // Evitar que el formulario se envíe
 
         let numPersons = parseFloat(localStorage.getItem('numPersons'));
         let totalIncome = 0;
-
-        // Crear un array para almacenar nombres e ingresos
         let personData = [];
 
         for (let i = 1; i <= numPersons; i++) {
@@ -94,8 +121,15 @@ document.addEventListener("DOMContentLoaded", function() {
             if (!isNaN(income)) {
                 totalIncome += income;
                 personData.push({ name, income });
+
+                // Almacenar los datos en el archivo JSON local
+                localStorage.setItem(`personName${i}`, name);
+                localStorage.setItem(`personIncome${i}`, income);
             }
         }
+
+        // Almacenar los datos en el archivo JSON local
+        localStorage.setItem('personData', JSON.stringify(personData));
 
         // Eliminar formularios y mostrar el resultado directamente en la interfaz
         document.querySelector('.calculator-container-form').innerHTML = `
@@ -105,30 +139,62 @@ document.addEventListener("DOMContentLoaded", function() {
                     let percentage = (income / totalIncome) * 100;
                     return `<p>${name} earns: ${percentage.toFixed(2)}%</p>`;
                 }).join('')}
-                <p>The total income is: ${totalIncome}</p>
+                <p>The total income is: $${totalIncome}</p>
+                <div>
+                    <canvas id="myChart"></canvas>
+                </div>
             </div>
         `;
+
+        // Obtén el contexto del lienzo
+        const ctx = document.getElementById('myChart').getContext('2d');
+
+        // Configura los datos del gráfico
+        const data = {
+            labels: personData.map(({ name }) => name),
+            datasets: [{
+                label: 'Incomes',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+                data: personData.map(({ income }) => income),
+            }],
+        };
+
+        // Configura las opciones del gráfico
+        const options = {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                },
+            },
+        };
+
+        // Crea el gráfico de barras
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: options,
+        });
     }
 
     // Agregar event listener al formulario para el evento submit
     form.addEventListener("submit", calculatePercentage);
 
     // Agregar event listeners al botón de personas
-    document.querySelector(".buttonNumPersons").addEventListener("click", function() {
+    document.querySelector(".buttonNumPersons").addEventListener("click", function () {
         const numPersons = pressNext();
-        document.querySelector('.calculate-button').addEventListener("click", function() {
-            addInfo(numPersons);
+        document.querySelector('.calculate-button').addEventListener("click", function () {
+            calculatePercentage();
         });
     });
 
-    document.querySelector(".numPersons").addEventListener("keydown", function(event) {
+    document.querySelector(".buttonNumPersons").addEventListener("keydown", function (event) {
         if (event.key === "Enter") {
             const numPersons = pressNext();
-            document.querySelector('.calculate-button').addEventListener("click", function() {
-                addInfo(numPersons);
+            document.querySelector('.calculate-button').addEventListener("keydown", function () {
+                calculatePercentage();
             });
         }
     });
 });
-
-
